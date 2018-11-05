@@ -73,9 +73,10 @@ stopping_time = int(nCr(50, 2))
 # values of the minimum violation values
 minimum_violations_lists = []
 minimum_violations_timesteps = []
+hist_timesteps = []
 
 # Outer loop for number of runs
-for runs in range(0,5):
+for runs in range(0,100):
     time_taken = 0
     min_vio_list = []
     r = copy.deepcopy(k)
@@ -114,6 +115,7 @@ for runs in range(0,5):
     # Update the lists for plotting
     minimum_violations_lists.append(copy.deepcopy(min_vio_list))
     minimum_violations_timesteps.append(copy.deepcopy(min_vio_timestep))
+    hist_timesteps.append(len(min_vio_timestep))
 
 # Plotting V vs. t
 #plt.plot(min_vio_timestep, min_vio_list, linestyle='-.', color='b',
@@ -129,4 +131,11 @@ for list1, list2 in zip(minimum_violations_timesteps,
 plt.xlabel('Number of timesteps t')
 plt.ylabel('Number of violations V')
 plt.show() 
+
+# Plotting the histogram for the timesteps
+x = hist_timesteps
+plt.hist(x, normed=True, bins=50)
+plt.xlabel('Number of occurences')
+plt.ylabel('Timesteps')
+plt.show()
    
